@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//MongoDB connexion
 mongoose.connect("mongodb+srv://" + process.env.USER + ":" + process.env.PASSWORD + "@sundacluster0.vvmwg.mongodb.net/SundaBook",
 {
     useNewUrlParser: true,
