@@ -3,7 +3,7 @@ const authController = require('../controllers/auth.controller');
 const userController = require('../controllers/user.controller');
 
 //auth
-router.post("/register", authController.signUp);
+router.post('/register', authController.signUp);
 
 //get User display
 router.get('/', userController.getAllUsers);
