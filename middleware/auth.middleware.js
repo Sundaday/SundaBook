@@ -4,7 +4,7 @@ const UserModel = require('../models/user.model')
 module.exports.checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
     if(token){
-        jwt.verify(token, process.env.SECRET_TOKEN, async(err, decodedToken)=>{
+        jwt.verify(token, process.env.SECRET_TOKEN, async(err, decodedToken) => {
             if(err){
                 res.locals.user = null;
                 res.cookies('jwt','', {maxAge: 1})
