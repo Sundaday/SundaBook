@@ -1,11 +1,13 @@
 const UserModel = require("../models/user.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 
+//get all users
 module.exports.getAllUsers = async (req, res) => {
   const users = await UserModel.find().select("-password");
   res.status(200).json(users);
 };
 
+//get user by id
 module.exports.userInfo = (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -16,6 +18,7 @@ module.exports.userInfo = (req, res) => {
   }).select("-password");
 };
 
+//put user by id
 module.exports.updateUser = async (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -37,6 +40,7 @@ module.exports.updateUser = async (req, res) => {
   }
 };
 
+//del user by id
 module.exports.deleteUser = async (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -49,6 +53,7 @@ module.exports.deleteUser = async (req, res) => {
   }
 };
 
+//patch add user id to follower list & id to following list
 module.exports.follow = (req, res) => {
   if (
     !ObjectId.isValid(req.params.id) ||
@@ -57,24 +62,24 @@ module.exports.follow = (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    // add to the follower list
+    //add to the follower list
     UserModel.findByIdAndUpdate(
       req.params.id,
-      { $addToSet: { following: req.body.idToFollow }},
+      { $addToSet: { following: req.body.idToFollow } },
       { new: true, upsert: true },
       (err, docs) => {
         if (!err) res.status(201).json(docs);
         else return res.status(400).json(err);
       }
     );
-    // add to following list
+    //add to following list
     UserModel.findByIdAndUpdate(
       req.body.idToFollow,
-      { $addToSet: { followers: req.params.id }},
+      { $addToSet: { followers: req.params.id } },
       { new: true, upsert: true },
       (err, docs) => {
-        //if (!err) res.status(201).json(docs);
-        if(err) return res.status(400).json(err);
+        //if (!err) res.status(201).json(docs); <-- no need this one cause of the first one 
+        if (err) return res.status(400).json(err);
       }
     );
   } catch (err) {
@@ -82,6 +87,7 @@ module.exports.follow = (req, res) => {
   }
 };
 
+//patch remove user id to follower list & id to following list
 module.exports.unfollow = (req, res) => {
   if (
     !ObjectId.isValid(req.params.id) ||
@@ -90,23 +96,24 @@ module.exports.unfollow = (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
+    //remove to the follower list
     UserModel.findByIdAndUpdate(
       req.params.id,
-      { $pull: { following: req.body.idToUnfollow }},
+      { $pull: { following: req.body.idToUnfollow } },
       { new: true, upsert: true },
       (err, docs) => {
         if (!err) res.status(201).json(docs);
         else return res.status(400).json(err);
       }
     );
-    // Retirer de la liste des followers
+    //remove to the following list
     UserModel.findByIdAndUpdate(
       req.body.idToUnfollow,
-      { $pull: { followers: req.params.id }},
+      { $pull: { followers: req.params.id } },
       { new: true, upsert: true },
       (err, docs) => {
-        //if (!err) res.status(201).json(docs);
-        if(err) return res.status(400).json(err);
+        //if (!err) res.status(201).json(docs); <-- no need this one cause of the first one
+        if (err) return res.status(400).json(err);
       }
     );
   } catch (err) {
