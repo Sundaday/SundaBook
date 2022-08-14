@@ -78,7 +78,7 @@ module.exports.follow = (req, res) => {
       { $addToSet: { followers: req.params.id } },
       { new: true, upsert: true },
       (err, docs) => {
-        //if (!err) res.status(201).json(docs); <-- no need this one cause of the first one 
+        //if (!err) res.status(201).json(docs); <-- no need this one cause of the first one
         if (err) return res.status(400).json(err);
       }
     );

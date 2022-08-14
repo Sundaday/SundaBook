@@ -23,6 +23,7 @@ module.exports.signUp = async (req, res) => {
     res.status(200).send({ errors });
   }
 };
+
 //Auth post -- create connexion
 module.exports.signIn = async (req, res) => {
   const { email, password } = req.body;
@@ -37,6 +38,7 @@ module.exports.signIn = async (req, res) => {
     res.status(200).json({ errors });
   }
 };
+
 //Auth get -- logout
 module.exports.logout = (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
