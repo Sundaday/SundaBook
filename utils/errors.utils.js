@@ -28,3 +28,11 @@ module.exports.signInErrors = (err) => {
   if (err.message.includes("password")) errors.password = "Invalid Password";
   return errors;
 };
+
+module.exports.uploadErrors = (err) => {
+  let errors = { format:'', maxSize:''};
+  if(err.message.includes('Invalid file'))
+    errors.format = "Invalid file"
+  if(err.message.includes('Invalid Size'))
+    errors.format = "Invalid Size"
+};
