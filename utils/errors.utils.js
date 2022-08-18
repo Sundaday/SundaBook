@@ -30,9 +30,8 @@ module.exports.signInErrors = (err) => {
 };
 
 module.exports.uploadErrors = (err) => {
-  let errors = { format:'', maxSize:''};
-  if(err.message.includes('Invalid file'))
-    errors.format = "Invalid file"
-  if(err.message.includes('Invalid Size'))
-    errors.format = "Invalid Size"
+  let errors = { format: "", maxSize: "" };
+  if (err.message.includes("invalid file")) errors.format = "Invalid Format";
+  if (err.message.includes("max size")) errors.maxSize = "Invalid Size";
+  return errors;
 };
