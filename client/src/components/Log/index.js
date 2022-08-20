@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
+
 export default function Log() {
-  const [SignUpFormModel, setSignUpFormModel] = useState("true")
-  const [SignInFormModel, setSignInFormModel] = useState("false")
+  const [signUpFormModel, setSignUpFormModel] = useState("true")
+  const [signInFormModel, setSignInFormModel] = useState("false")
 
   const handleModals = (e) => {
     if (e.target.id === 'signUp') {
@@ -18,11 +19,11 @@ export default function Log() {
     <div className='connection-form'>
       <div className='form-container'>
         <ul>
-          <li onClick={handleModals} id="signUp">SignUp</li>
-          <li onClick={handleModals} id="signIn">SignIn</li>
+          <li className={signUpFormModel ? 'active-btn' : null} onClick={handleModals} id="signUp">SignUp</li>
+          <li className={signInFormModel ? 'active-btn' : null} onClick={handleModals} id="signIn">SignIn</li>
         </ul>
-        {SignUpFormModel && <SignUpForm />}
-        {SignInFormModel && <SignInForm />}
+        {signUpFormModel && <SignUpForm />}
+        {signInFormModel && <SignInForm />}
       </div>
     </div>
   )
