@@ -1,7 +1,8 @@
 import React from 'react'
+import Routes from './components/Routes'
 
 export default function App() {
   return (
-    <div>Bienvenue chez moi</div>
+    <Routes />
   )
 }
