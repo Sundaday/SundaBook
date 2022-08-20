@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
 
-export default function Log() {
-  const [signUpFormModel, setSignUpFormModel] = useState("true")
-  const [signInFormModel, setSignInFormModel] = useState("false")
+export default function Log( props ) {
+  const [signUpFormModel, setSignUpFormModel] = useState(props.signUp)
+  const [signInFormModel, setSignInFormModel] = useState(props.signIn)
 
   const handleModals = (e) => {
     if (e.target.id === 'signUp') {
@@ -19,8 +19,8 @@ export default function Log() {
     <div className='connection-form'>
       <div className='form-container'>
         <ul>
-          <li className={signUpFormModel ? 'active-btn' : null} onClick={handleModals} id="signUp">SignUp</li>
-          <li className={signInFormModel ? 'active-btn' : null} onClick={handleModals} id="signIn">SignIn</li>
+          <li className={signUpFormModel ? 'active-btn' : null} onClick={handleModals} id='signUp'>SignUp</li>
+          <li className={signInFormModel ? 'active-btn' : null} onClick={handleModals} id='signIn'>SignIn</li>
         </ul>
         {signUpFormModel && <SignUpForm />}
         {signInFormModel && <SignInForm />}
