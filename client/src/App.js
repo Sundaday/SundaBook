@@ -4,7 +4,7 @@ import { UidContext } from './components/AppContext'
 import axios from 'axios'
 
 export default function App() {
-  const [uid, setUid] = useState()
+  const [uid, setUid] = useState(null)
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -15,7 +15,7 @@ export default function App() {
       })
         .then((res) => 
           {
-            console.log(res)
+            //console.log(res)
             setUid(res.data)
           })
         .catch((err) => console.log('No token found'))
