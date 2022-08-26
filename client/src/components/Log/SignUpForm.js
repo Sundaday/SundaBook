@@ -21,11 +21,7 @@ export default function SignUpForm() {
     termsError.innerHTML = ''
 
 
-    if (password.length < 6 || password !== confirmPassword || !terms.checked ) {
-      if (password.length < 6) {
-        passwordError.innerHTML = 'Password must be at least 6 characters'
-      }
-
+    if ( password !== confirmPassword || !terms.checked ) {
       if (password !== confirmPassword)
         passwordConfirmError.innerHTML = "Password don't match"
 
