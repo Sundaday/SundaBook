@@ -16,14 +16,20 @@ export default function SignUpForm() {
     const passwordConfirmError = document.querySelector('.password-confirm.error')
     const termsError = document.querySelector('.terms.error')
 
+    passwordError.innerHTML = ''
     passwordConfirmError.innerHTML = ''
     termsError.innerHTML = ''
 
-    if (password !== confirmPassword || !termsError.checked) {
+
+    if (password.length < 6 || password !== confirmPassword || !terms.checked ) {
+      if (password.length < 6) {
+        passwordError.innerHTML = 'Password must be at least 6 characters'
+      }
+
       if (password !== confirmPassword)
         passwordConfirmError.innerHTML = "Password don't match"
 
-      if (!termsError.checked)
+      if (!terms.checked)
         termsError.innerHTML = "You have to confirm terms before submitting"
     } else {
       await axios({
