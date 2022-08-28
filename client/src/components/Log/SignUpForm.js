@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import SignInForm from './SignInForm'
 
 export default function SignUpForm() {
+  const [formSubmit, setFormSubmit] = useState(false)
   const [pseudo, setPseudo] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -21,7 +23,7 @@ export default function SignUpForm() {
     termsError.innerHTML = ''
 
 
-    if ( password !== confirmPassword || !terms.checked ) {
+    if (password !== confirmPassword || !terms.checked) {
       if (password !== confirmPassword)
         passwordConfirmError.innerHTML = "Password don't match"
 
@@ -42,6 +44,8 @@ export default function SignUpForm() {
             pseudoError.innerHTML = res.data.errors.pseudo
             emailError.innerHTML = res.data.errors.email
             passwordError.innerHTML = res.data.errors.password
+          } else {
+            setFormSubmit(true)
           }
         })
         .catch((err) => { console.log(err) });
@@ -49,65 +53,74 @@ export default function SignUpForm() {
   }
 
   return (
-    <form action='' onSubmit={handleRegister} id='sign-up-form'>
-      <label htmlFor='pseudo'>Pseudo</label>
-      <br />
-      <input
-        type='text'
-        name='pseudo'
-        id='pseudo'
-        onChange={(e) => setPseudo(e.target.value)}
-        value={pseudo}
-      />
-      <br />
-      <div className='pseudo error'></div>
-      <br />
-      <label htmlFor='email'>Email</label>
-      <br />
-      <input
-        type='text'
-        name='email'
-        id='email'
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-      />
-      <br />
-      <div className='email error'></div>
-      <br />
-      <label htmlFor='password'>Password</label>
-      <br />
-      <input
-        type='password'
-        name='password'
-        id='password'
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
-      <br />
-      <div className='password error'></div>
-      <br />
-      <label htmlFor='password-conf'>Confirm Password</label>
-      <br />
-      <input
-        type='password'
-        name='password'
-        id='password-conf'
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        value={confirmPassword}
-      />
-      <br />
-      <div className='password-confirm error'></div>
-      <br />
-      <input type='checkbox' id='terms' />
-      <label htmlFor='terms'>
-        Terms of{' '}
-        <a href='/' target='_blank' rel='noopener noreferrer'>
-          Use
-        </a>
-      </label>
-      <br />
-      <div className='terms error'></div>
-      <input type='submit' value='Register' />
-    </form>
+    <>
+      {formSubmit ? (
+        <>
+          <SignInForm />
+          <h4 className="success">User Creation Succeed, please connect your account</h4>
+        </>
+      ) : (
+        <form action='' onSubmit={handleRegister} id='sign-up-form'>
+          <label htmlFor='pseudo'>Pseudo</label>
+          <br />
+          <input
+            type='text'
+            name='pseudo'
+            id='pseudo'
+            onChange={(e) => setPseudo(e.target.value)}
+            value={pseudo}
+          />
+          <br />
+          <div className='pseudo error'></div>
+          <br />
+          <label htmlFor='email'>Email</label>
+          <br />
+          <input
+            type='text'
+            name='email'
+            id='email'
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <br />
+          <div className='email error'></div>
+          <br />
+          <label htmlFor='password'>Password</label>
+          <br />
+          <input
+            type='password'
+            name='password'
+            id='password'
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+          <br />
+          <div className='password error'></div>
+          <br />
+          <label htmlFor='password-conf'>Confirm Password</label>
+          <br />
+          <input
+            type='password'
+            name='password'
+            id='password-conf'
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmPassword}
+          />
+          <br />
+          <div className='password-confirm error'></div>
+          <br />
+          <input type='checkbox' id='terms' />
+          <label htmlFor='terms'>
+            Terms of{' '}
+            <a href='/' target='_blank' rel='noopener noreferrer'>
+              Use
+            </a>
+          </label>
+          <br />
+          <div className='terms error'></div>
+          <input type='submit' value='Register' />
+        </form>
+      )}
+    </>
   )
 }
