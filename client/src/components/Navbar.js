@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { UidContext } from './AppContext'
+import Logout from './Log/Logout'
 
 export default function Navbar() {
     const uid = useContext(UidContext)
@@ -8,7 +9,7 @@ export default function Navbar() {
         <nav>
             <div className="nav-container">
                 <div className="logo">
-                    <NavLink exact to='/'>
+                    <NavLink to="/">
                         <div className="logo">
                             <img src="./img/icon.png" alt="Logo" />
                             <h3>SundaBook</h3>
@@ -17,20 +18,19 @@ export default function Navbar() {
                 </div>
                 {uid ? (
                     <ul>
-                        <li>
-                            <li className="welcome">
-                                <NavLink exact to='/profil'>
-                                    <h5>Welcome { }</h5>
-                                </NavLink>
-                            </li>
+                        <li></li>
+                        <li className="welcome">
+                            <NavLink to="/profil">
+                                <h5>Welcome { }</h5>
+                            </NavLink>
                         </li>
-                        logo logout
+                        <Logout />
                     </ul>
                 ) : (
                     <ul>
                         <li></li>
                         <li>
-                            <NavLink exact to='/profil'>
+                            <NavLink to="/profil">
                                 <img src='./img/icons/login.svg' alt='login' />
                             </NavLink>
                         </li>
