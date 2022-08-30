@@ -2,12 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './styles/index.scss'
+import { Provider } from 'react-redux';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers'
+
+//dev tools from here
+import { composeWithDevTools } from 'redux-devtools-extension';
+//import logger from 'redux-logger';
+
 import reportWebVitals from './reportWebVitals';
+
+const store = createStore(
+    rootReducer, composeWithDevTools(applyMiddleware(thunk)) //, logger)) post from reducer into console
+)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
-    <App />
+    <Provider store={store}>
+        <App />
+    </Provider>
 
 );
 
