@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Log from '../components/Log/index'
 import { UidContext } from '../components/AppContext'
+import UpdateProfil from '../components/Profil/UpdateProfil'
 
 export default function Profil() {
   const uid = useContext(UidContext)
@@ -8,7 +9,7 @@ export default function Profil() {
   return (
     <div className='profil-page'>
       {uid ? (
-        <h1>Update Page</h1>
+        <UpdateProfil />
       ) : (
         <div className='log-container'>
           <Log signIn={false} signUp={true} />
@@ -17,6 +18,6 @@ export default function Profil() {
           </div>
         </div>
       )}
-    </div >
+    </div>
   )
 }
