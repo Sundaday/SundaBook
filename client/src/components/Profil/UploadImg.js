@@ -18,7 +18,7 @@ export default function UploadImg() {
 
     return (
         <form onSubmit={handlePicture} className='upload-pic'>
-            <label hidden='file'>Select new Image</label>
+            <label htmlFor='file'>Select new Image</label>
             <input
                 type='file'
                 id='file'
