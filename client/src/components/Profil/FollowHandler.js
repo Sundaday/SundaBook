@@ -21,18 +21,18 @@ export default function FollowHandler({ idToFollow }) {
         if (!isEmpty(userData.following)) {
             if (userData.following.includes(idToFollow)) {
                 setIsFollowed(true);
-            } else setIsFollowed(false);
+            } else { setIsFollowed(false) };
         }
-    }, [userData, idToFollow]) // []<= callback to restart useEffect
+    }, [idToFollow]) // []<= callback to restart useEffect
 
     return (
         <>
-            {isFollowed && (
+            {isFollowed && !isEmpty(userData) && (
                 <span onClick={handleUnfollow}>
                     <button className='unfollow-btn'>Unfollow</button>
                 </span>
             )}
-            {isFollowed === false && (
+            {isFollowed === false && !isEmpty(userData) && (
                 <span onClick={handleFollow}>
                     <button className='follow-btn'>Follow</button>
                 </span>

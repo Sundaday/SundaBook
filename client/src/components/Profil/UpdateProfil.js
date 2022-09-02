@@ -51,14 +51,14 @@ export default function UpdateProfil() {
             )}
           </div>
           <h4>Registered since {dateParser(userData.createdAt)}</h4>
-          <h5 onClick={() => setFollowingPopUp(true)}>Followings : {userData.following ? userData.following.length : ""}</h5>
+          <h5 onClick={() => setFollowingPopUp(true)}>Subscriptions : {userData.following ? userData.following.length : ""}</h5>
           <h5 onClick={() => setFollowersPopUp(true)}>Followers : {userData.followers ? userData.followers.length : ""}</h5>
         </div>
       </div>
       {followingPopUp && (
         <div className='popup-profil-container'>
           <div className='modal'>
-            <h3>Followings</h3>
+            <h3>Subscriptions</h3>
             <span className='cross' onClick={() => setFollowingPopUp(false)}>&#10005;</span>
             <ul>
               {usersData.map((user) => {
