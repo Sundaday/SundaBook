@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
+import { getUsers } from './actions/users.action';
 
 //dev tools from here
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -16,6 +17,8 @@ import reportWebVitals from './reportWebVitals';
 const store = createStore(
     rootReducer, composeWithDevTools(applyMiddleware(thunk)) //, logger)) post from reducer into console
 )
+
+store.dispatch(getUsers())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,7 +1,10 @@
 import React from 'react'
+import LeftNav from '../components/LeftNav'
 
 export default function Home() {
   return (
-    <div className='home'>Home prtou prtou</div>
+    <div className='home'>
+      <LeftNav />
+    </div>
   )
 }
