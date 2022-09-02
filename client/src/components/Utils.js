@@ -13,4 +13,4 @@ export const dateParser = (num) => {
     let date = new Date(timestamp).toLocaleDateString('en-EN', options)
 
     return date.toString()
-} 
+}
