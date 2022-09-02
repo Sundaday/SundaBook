@@ -9,6 +9,7 @@ export default function UpdateProfil() {
   const [bio, setBio] = useState('')
   const [updateForm, setUpdateForm] = useState(false)
   const userData = useSelector((state) => state.userReducer)
+  const usersData = useSelector((state) => state.usersReducer)
   const dispatch = useDispatch()
   const [followingPopUp, setFollowingPopUp] = useState(false)
   const [followersPopUp, setFollowersPopUp] = useState(false)
@@ -53,25 +54,54 @@ export default function UpdateProfil() {
           <h5 onClick={() => setFollowersPopUp(true)}>Followers : {userData.followers ? userData.followers.length : ""}</h5>
         </div>
       </div>
-      {followingPopUp &&
+      {followingPopUp && (
         <div className='popup-profil-container'>
           <div className='modal'>
             <h3>Followings</h3>
-            <span className='cross' onClick={()=> setFollowingPopUp(false)}>&#10005;</span>
-          </div>
-        </div>
-      }
-      {followersPopUp &&
-        <div className='popup-profil-container'>
-          <div className='modal'>
-            <h3>Followers</h3>
-            <span className='cross' onClick={()=> setFollowersPopUp(false)}>&#10005;</span>
+            <span className='cross' onClick={() => setFollowingPopUp(false)}>&#10005;</span>
             <ul>
-              
+              {usersData.map((user) => {
+                for (let i = 0; i < userData.following.length; i++) {
+                  if (user._id === userData.following[i]) {
+                    return (
+                      <li key={user._id}>
+                        <img src={user.picture} alt='user-pic' />
+                        <h4>{user.pseudo}</h4>
+                        <h1>FOLLOW HANDLER</h1>
+                      </li>
+                    )
+                  }
+                }
+                return null;
+              })}
             </ul>
           </div>
         </div>
-      }
+      )}
+      {followersPopUp && (
+        <div className='popup-profil-container'>
+          <div className='modal'>
+            <h3>Followers</h3>
+            <span className='cross' onClick={() => setFollowersPopUp(false)}>&#10005;</span>
+            <ul>
+              {usersData.map((user) => {
+                for (let i = 0; i < userData.followers.length; i++) {
+                  if (user._id === userData.followers[i]) {
+                    return (
+                      <li key={user._id}>
+                        <img src={user.picture} alt='user-pic' />
+                        <h4>{user.pseudo}</h4>
+                        <h1>FOLLOW HANDLER</h1>
+                      </li>
+                    )
+                  }
+                }
+                return null;
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
