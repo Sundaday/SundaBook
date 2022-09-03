@@ -23,7 +23,7 @@ export default function FollowHandler({ idToFollow }) {
                 setIsFollowed(true);
             } else { setIsFollowed(false) };
         }
-    }, [idToFollow]) // []<= callback to restart useEffect
+    }, [idToFollow]) // []<= callback to restart useEffect PROBLEME HERE ! 
 
     return (
         <>
