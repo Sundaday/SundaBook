@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { getPosts } from '../actions/post.actions'
 
 export default function Thread() {
-  return (
-    <div>Thread</div>
-  )
+    const { loadPost, setLoadPost } = useState(true)
+    const dispatch = useDispatch()
+    
+    useEffect(() => { 
+        if (loadPost) {
+            dispatch(getPosts())
+            setLoadPost(false)
+        }
+        return () => dispatch(getPosts(),[loadPost])
+    })
+
+
+    return (
+        <div>Thread</div>
+    )
 }
