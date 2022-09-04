@@ -22,8 +22,8 @@ export default function FollowHandler({ idToFollow }) {
             if (userData.following.includes(idToFollow)) {
                 setIsFollowed(true);
             } else { setIsFollowed(false) };
-        }
-    }, [idToFollow]) // []<= callback to restart useEffect PROBLEME HERE ! 
+        }   
+    },[idToFollow]) // []<= callback to restart useEffect PROBLEME HERE ! 
 
     return (
         <>
